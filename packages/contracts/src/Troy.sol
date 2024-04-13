@@ -10,9 +10,11 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
     struct TroyStorage {
         uint256 championChainId;
         uint256 soldierAmount;
+        mapping(bytes32 => bool) messageIdArrived;
     }
 
     event SoldiersArrive(
+        bytes32 indexed messageId,
         uint256 indexed chainId,
         uint256 amount,
         uint256 initChampion,
@@ -59,7 +61,13 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
             }
         }
 
+        bytes32 messageId = any2EvmMessage.messageId;
+
+        // mark message as arrived
+        _getTroyStorage().messageIdArrived[messageId] = true;
+
         emit SoldiersArrive(
+            messageId,
             srcChainId,
             incommingSoldierAmount,
             championChainId,
@@ -69,7 +77,8 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
         );
     }
 
-    function readStorageValue() public view returns (TroyStorage memory) {
-        return _getTroyStorage();
+    function readStorageValue() public view returns (uint256 championChainId, uint256 soldierAmount) {
+        TroyStorage storage $ = _getTroyStorage();
+        return ($.championChainId, $.soldierAmount);
     }
 }

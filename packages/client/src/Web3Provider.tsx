@@ -1,4 +1,4 @@
-import { WagmiProvider, createConfig } from "wagmi";
+import { WagmiProvider, createConfig, http } from "wagmi";
 import {
   arbitrumSepolia,
   avalancheFuji,
@@ -21,7 +21,15 @@ const config = createConfig(
       bscTestnet,
       baseSepolia,
     ],
-    // transports: {},
+    transports: {
+      [avalancheFuji.id]: http(
+        "https://avalanche-fuji-c-chain-rpc.publicnode.com"
+      ),
+      [optimismSepolia.id]: http("https://optimism-sepolia-rpc.publicnode.com"),
+      [arbitrumSepolia.id]: http("https://arbitrum-sepolia-rpc.publicnode.com"),
+      [bscTestnet.id]: http("https://bsc-testnet-rpc.publicnode.com"),
+      [baseSepolia.id]: http("https://base-sepolia-rpc.publicnode.com"),
+    },
 
     // Required API Keys
     walletConnectProjectId: "",
