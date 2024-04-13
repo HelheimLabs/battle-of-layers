@@ -16,6 +16,7 @@ export function DeploymentLocation(props: IDeploymentLocation) {
   return (
     <div
       className={`absolute w-40 h-40 flex flex-col items-center justify-center ${props.className}`}
+      id={`chain-${props.chainId}`}
     >
       <img className="mb-4" src={getChainImage(props.chainId)}></img>
       <button
@@ -27,7 +28,7 @@ export function DeploymentLocation(props: IDeploymentLocation) {
         }}
         className="btn"
       >
-        Boost Soldiers
+        Fund Soldiers
       </button>
       <div className=" absolute -top-[17rem] -left-24  translate-x-1/2">
         <ConfirmDialog chainId={props.chainId} isShow={isShow} />

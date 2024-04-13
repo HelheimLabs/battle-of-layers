@@ -53,9 +53,9 @@ export function ConfirmDialog(props: IConfirmDialog) {
 
   return (
     <dialog
-      className={`absolute w-96 h-72 border rounded-xl flex flex-col modal-box z-10 ${props.isShow ? "" : "hidden"} overflow-hidden`}
+      className={`absolute w-96 h-72 border rounded-xl flex flex-col modal-box z-100 ${props.isShow ? "" : "hidden"} overflow-hidden`}
     >
-      <div className="text-2xl font-bold my-2">Boost Soldiers</div>
+      <div className="text-2xl font-bold my-2">Fund Soldiers</div>
       <div className="flex flex-row items-center justify-center">
         <div className="-ml-12 mr-4">Fund {balanceData?.symbol} amount</div>
         <input

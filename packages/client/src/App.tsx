@@ -1,4 +1,10 @@
-import { arbitrumSepolia, avalancheFuji, baseSepolia, bscTestnet, optimismSepolia } from "viem/chains";
+import {
+  arbitrumSepolia,
+  avalancheFuji,
+  baseSepolia,
+  bscTestnet,
+  optimismSepolia,
+} from "viem/chains";
 import { Web3Provider } from "./Web3Provider";
 import { Champion } from "./component/Champion";
 import { DeploymentLocation } from "./component/DeploymentLocation";
@@ -18,24 +24,24 @@ function App() {
           className="left-1/2 -translate-x-1/2 bottom-[4rem] "
           chainId={optimismSepolia.id}
         />
-        {/* arb sepolia */}
-        <DeploymentLocation
-          className="left-[20rem] bottom-[15rem] "
-          chainId={arbitrumSepolia.id}
-        />
         {/* base sepolia */}
         <DeploymentLocation
-          className="left-[20rem] top-[15rem] "
+          className="left-[20rem] top-[20rem] "
           chainId={baseSepolia.id}
+        />
+        {/* arb sepolia */}
+        <DeploymentLocation
+          className="left-[20rem] bottom-[20rem] "
+          chainId={arbitrumSepolia.id}
         />
         {/*fuji */}
         <DeploymentLocation
-          className="right-[20rem] top-[15rem] "
+          className="right-[20rem] top-[20rem] "
           chainId={avalancheFuji.id}
         />
         {/* bsc testnet */}
         <DeploymentLocation
-          className="right-[20rem] bottom-[15rem] "
+          className="right-[20rem] bottom-[20rem] "
           chainId={bscTestnet.id}
         />
       </div>
