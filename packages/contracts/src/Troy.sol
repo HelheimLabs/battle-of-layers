@@ -68,4 +68,8 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
             _getTroyStorage().soldierAmount
         );
     }
+
+    function readStorageValue() public view returns (TroyStorage memory) {
+        return _getTroyStorage();
+    }
 }

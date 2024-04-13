@@ -8,7 +8,7 @@ import { Client } from "@chainlink/contracts-ccip/src/v0.8/ccip/libraries/Client
 import { LinkTokenInterface } from "@chainlink/contracts/src/v0.8/shared/interfaces/LinkTokenInterface.sol";
 import { AggregatorV3Interface } from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
-contract TrajonHorse is UUPSUpgradeable, Ownable2StepUpgradeable {
+contract TrojanHorse is UUPSUpgradeable, Ownable2StepUpgradeable {
     struct TrajonHorseStorage {
         IRouterClient router;
         AggregatorV3Interface aggregator;
@@ -62,7 +62,7 @@ contract TrajonHorse is UUPSUpgradeable, Ownable2StepUpgradeable {
     function sendHorse(uint256 fundForSoldiers) external payable onlyOwner returns (bytes32 messageId) {
         (, int256 answer,,,) = _getTrajanHorseStorage().aggregator.latestRoundData();
         uint8 decimal = _getTrajanHorseStorage().aggregator.decimals();
-        uint256 soldierAmount = fundForSoldiers * 10 ** decimal / uint256(answer);
+        uint256 soldierAmount = fundForSoldiers * uint256(answer) / (10 ** decimal * 1 ether);
 
         address receiver = _getTrajanHorseStorage().receiver;
         uint64 destinationChainSelector = _getTrajanHorseStorage().destinationChainSelector;
@@ -98,5 +98,33 @@ contract TrajonHorse is UUPSUpgradeable, Ownable2StepUpgradeable {
 
         // Return the message ID
         return messageId;
+    }
+
+    function getFee(uint256 fundForSoldiers) public view returns (uint256 fees, uint256 soldierAmount) {
+        (, int256 answer,,,) = _getTrajanHorseStorage().aggregator.latestRoundData();
+        uint8 decimal = _getTrajanHorseStorage().aggregator.decimals();
+        soldierAmount = fundForSoldiers * uint256(answer) / (10 ** decimal * 1 ether);
+
+        address receiver = _getTrajanHorseStorage().receiver;
+        uint64 destinationChainSelector = _getTrajanHorseStorage().destinationChainSelector;
+
+        // encode data
+        bytes memory data = abi.encode(block.chainid, soldierAmount);
+
+        // Create an EVM2AnyMessage struct in memory with necessary information for sending a cross-chain message
+        Client.EVM2AnyMessage memory evm2AnyMessage = Client.EVM2AnyMessage({
+            receiver: abi.encode(receiver), // ABI-encoded
+            data: data, // ABI-encoded string
+            tokenAmounts: new Client.EVMTokenAmount[](0), // Empty array indicating no tokens are being sent
+            extraArgs: Client._argsToBytes(
+                // Additional arguments, setting gas limit
+                Client.EVMExtraArgsV1({ gasLimit: 200_000 })
+            ),
+            // Set the feeToken  address, use native token
+            feeToken: address(0)
+        });
+
+        // Get the fee required to send the message
+        fees = _getTrajanHorseStorage().router.getFee(destinationChainSelector, evm2AnyMessage);
     }
 }

@@ -14,9 +14,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const aggregator = getAggregator(chainId);
 
   // manually set receiver
-  const receiver = "0x60688b3ba8816b4003b72f9b3927c3bb8e598005";
+  const receiver = "0x10d5617ef73E62545F45017A0F85847c081b9fcE";
 
-  await deploy("TrajonHorse", {
+  await deploy("TrojanHorse", {
     from: deployer,
     args: [],
     proxy: {
@@ -28,16 +28,16 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
           // chain selector
           args: [deployer, router, aggregator, "16015286601757825753", receiver],
         },
-        onUpgrade: {
-          methodName: "upgradeAndCall",
-          args: ["{implementation}", "0x"],
-        },
+      },
+      upgradeFunction: {
+        methodName: "upgradeToAndCall",
+        upgradeArgs: ["{implementation}", "{data}"],
       },
       checkProxyAdmin: false,
     },
-    deterministicDeployment: keccak256(stringToBytes("TrajonHorse")),
+    deterministicDeployment: keccak256(stringToBytes("TrojanHorse")),
     log: true,
   });
 };
 export default func;
-func.tags = ["TrajonHorse"];
+func.tags = ["TrojanHorse"];

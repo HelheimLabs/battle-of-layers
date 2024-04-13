@@ -23,9 +23,13 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
           args: [deployer, router],
         },
       },
+      upgradeFunction: {
+        methodName: "upgradeToAndCall",
+        upgradeArgs: ["{implementation}", "{data}"],
+      },
       checkProxyAdmin: false,
     },
-    deterministicDeployment: keccak256(stringToBytes("Troy")),
+    deterministicDeployment: keccak256(stringToBytes("Troy4")),
     log: true,
   });
 };

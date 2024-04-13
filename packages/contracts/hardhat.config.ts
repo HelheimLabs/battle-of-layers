@@ -44,9 +44,9 @@ const config: HardhatUserConfig = {
       url: node_url("arb_sepolia"),
       accounts: accounts("arb_sepolia"),
     },
-    fujin: {
-      url: node_url("fujin"),
-      accounts: accounts("fujin"),
+    fuji: {
+      url: node_url("fuji"),
+      accounts: accounts("fuji"),
     },
     bnb_test: {
       url: node_url("bnb_test"),

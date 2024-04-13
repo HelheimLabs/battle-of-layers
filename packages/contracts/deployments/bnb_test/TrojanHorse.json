@@ -1,5 +1,5 @@
 {
-  "address": "0x10d5617ef73E62545F45017A0F85847c081b9fcE",
+  "address": "0x493A69ec1de995B5b0fB968Bc67022D1C54E490e",
   "abi": [
     {
       "anonymous": false,
@@ -92,14 +92,8 @@
       "type": "error"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "router",
-          "type": "address"
-        }
-      ],
-      "name": "InvalidRouter",
+      "inputs": [],
+      "name": "NotEnoughBalance",
       "type": "error"
     },
     {
@@ -144,6 +138,31 @@
       ],
       "name": "UUPSUnsupportedProxiableUUID",
       "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "messageId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "soldierAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fees",
+          "type": "uint256"
+        }
+      ],
+      "name": "HorseSent",
+      "type": "event"
     },
     {
       "anonymous": false,
@@ -197,49 +216,6 @@
       "type": "event"
     },
     {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "internalType": "uint256",
-          "name": "chainId",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "amount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "initChampion",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "initAmount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "laterChainpion",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "laterAmount",
-          "type": "uint256"
-        }
-      ],
-      "name": "SoldiersArrive",
-      "type": "event"
-    },
-    {
       "inputs": [],
       "name": "UPGRADE_INTERFACE_VERSION",
       "outputs": [
@@ -262,63 +238,22 @@
     {
       "inputs": [
         {
-          "components": [
-            {
-              "internalType": "bytes32",
-              "name": "messageId",
-              "type": "bytes32"
-            },
-            {
-              "internalType": "uint64",
-              "name": "sourceChainSelector",
-              "type": "uint64"
-            },
-            {
-              "internalType": "bytes",
-              "name": "sender",
-              "type": "bytes"
-            },
-            {
-              "internalType": "bytes",
-              "name": "data",
-              "type": "bytes"
-            },
-            {
-              "components": [
-                {
-                  "internalType": "address",
-                  "name": "token",
-                  "type": "address"
-                },
-                {
-                  "internalType": "uint256",
-                  "name": "amount",
-                  "type": "uint256"
-                }
-              ],
-              "internalType": "struct Client.EVMTokenAmount[]",
-              "name": "destTokenAmounts",
-              "type": "tuple[]"
-            }
-          ],
-          "internalType": "struct Client.Any2EVMMessage",
-          "name": "message",
-          "type": "tuple"
+          "internalType": "uint256",
+          "name": "fundForSoldiers",
+          "type": "uint256"
         }
       ],
-      "name": "ccipReceive",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getRouter",
+      "name": "getFee",
       "outputs": [
         {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "internalType": "uint256",
+          "name": "fees",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "soldierAmount",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -334,6 +269,21 @@
         {
           "internalType": "address",
           "name": "router_",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "aggregator_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "chainSelector_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "receiver_",
           "type": "address"
         }
       ],
@@ -383,31 +333,6 @@
     },
     {
       "inputs": [],
-      "name": "readStorageValue",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "championChainId",
-              "type": "uint256"
-            },
-            {
-              "internalType": "uint256",
-              "name": "soldierAmount",
-              "type": "uint256"
-            }
-          ],
-          "internalType": "struct Troy.TroyStorage",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
       "name": "renounceOwnership",
       "outputs": [],
       "stateMutability": "nonpayable",
@@ -416,20 +341,20 @@
     {
       "inputs": [
         {
-          "internalType": "bytes4",
-          "name": "interfaceId",
-          "type": "bytes4"
+          "internalType": "uint256",
+          "name": "fundForSoldiers",
+          "type": "uint256"
         }
       ],
-      "name": "supportsInterface",
+      "name": "sendHorse",
       "outputs": [
         {
-          "internalType": "bool",
-          "name": "",
-          "type": "bool"
+          "internalType": "bytes32",
+          "name": "messageId",
+          "type": "bytes32"
         }
       ],
-      "stateMutability": "pure",
+      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -480,65 +405,65 @@
       "type": "constructor"
     }
   ],
-  "transactionHash": "0x50889835c8585e2070ce94f7809b6c949cc3cbb86b2baa920f0ccb9b1b0d12a0",
+  "transactionHash": "0x363396cbefe91b1f2dd8fd9b13bde6023510c3ab4e2e37f102daa89ee8483cc6",
   "receipt": {
     "to": "0x4e59b44847b379578588920cA78FbF26c0B4956C",
     "from": "0xba45b3d7A42c3554fa98bDC3F790da2676Cb0560",
     "contractAddress": null,
-    "transactionIndex": 38,
-    "gasUsed": "328456",
-    "logsBloom": "0x00000000000000000000000000000000400000000000000000800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100002000001000000000000000000000000000000080000020000000000000000000800000000000000000000000000000000400000000000000000000800000000000000000000000080000000040200000000000000000000000100000000000000000000000000000000000000000000000000000020008000000000000000000000000000000004000400020000000020000000000000000000000000000001000000000000000000000000000000000000",
-    "blockHash": "0xf6a23e0be2b14a0e4d4be339472640e8cc73330fd6ed8553c5c92eace0823208",
-    "transactionHash": "0x50889835c8585e2070ce94f7809b6c949cc3cbb86b2baa920f0ccb9b1b0d12a0",
+    "transactionIndex": 1,
+    "gasUsed": "375147",
+    "logsBloom": "0x00000000000000000000000000002000400000000000000000800000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000002000001000000080000000000000000000000000000020000000000000000000800000000000000000000000000000000400000000000000000000800000000000000000000000080000000000000000000000000000000000100000000000001000000000000000000000000000000000000000020000000000000000010000000000000000004000400020000000020000000000000000000000000000000800000000000000000000000000000000000",
+    "blockHash": "0x1e782b9299451a4f4ead6ca76b42a275385b8d2b4fe0ad9b3097d76ad086ed7e",
+    "transactionHash": "0x363396cbefe91b1f2dd8fd9b13bde6023510c3ab4e2e37f102daa89ee8483cc6",
     "logs": [
       {
-        "transactionIndex": 38,
-        "blockNumber": 5691716,
-        "transactionHash": "0x50889835c8585e2070ce94f7809b6c949cc3cbb86b2baa920f0ccb9b1b0d12a0",
-        "address": "0x10d5617ef73E62545F45017A0F85847c081b9fcE",
+        "transactionIndex": 1,
+        "blockNumber": 39444384,
+        "transactionHash": "0x363396cbefe91b1f2dd8fd9b13bde6023510c3ab4e2e37f102daa89ee8483cc6",
+        "address": "0x493A69ec1de995B5b0fB968Bc67022D1C54E490e",
         "topics": [
           "0xbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b",
-          "0x0000000000000000000000002b4899c7316cc7d15301dbd0a5d7204456d3b441"
+          "0x000000000000000000000000b0d02c3025068d889e3a6d77ed48a9f7062be153"
         ],
         "data": "0x",
-        "logIndex": 34,
-        "blockHash": "0xf6a23e0be2b14a0e4d4be339472640e8cc73330fd6ed8553c5c92eace0823208"
+        "logIndex": 1,
+        "blockHash": "0x1e782b9299451a4f4ead6ca76b42a275385b8d2b4fe0ad9b3097d76ad086ed7e"
       },
       {
-        "transactionIndex": 38,
-        "blockNumber": 5691716,
-        "transactionHash": "0x50889835c8585e2070ce94f7809b6c949cc3cbb86b2baa920f0ccb9b1b0d12a0",
-        "address": "0x10d5617ef73E62545F45017A0F85847c081b9fcE",
+        "transactionIndex": 1,
+        "blockNumber": 39444384,
+        "transactionHash": "0x363396cbefe91b1f2dd8fd9b13bde6023510c3ab4e2e37f102daa89ee8483cc6",
+        "address": "0x493A69ec1de995B5b0fB968Bc67022D1C54E490e",
         "topics": [
           "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
           "0x0000000000000000000000000000000000000000000000000000000000000000",
           "0x000000000000000000000000ba45b3d7a42c3554fa98bdc3f790da2676cb0560"
         ],
         "data": "0x",
-        "logIndex": 35,
-        "blockHash": "0xf6a23e0be2b14a0e4d4be339472640e8cc73330fd6ed8553c5c92eace0823208"
+        "logIndex": 2,
+        "blockHash": "0x1e782b9299451a4f4ead6ca76b42a275385b8d2b4fe0ad9b3097d76ad086ed7e"
       },
       {
-        "transactionIndex": 38,
-        "blockNumber": 5691716,
-        "transactionHash": "0x50889835c8585e2070ce94f7809b6c949cc3cbb86b2baa920f0ccb9b1b0d12a0",
-        "address": "0x10d5617ef73E62545F45017A0F85847c081b9fcE",
+        "transactionIndex": 1,
+        "blockNumber": 39444384,
+        "transactionHash": "0x363396cbefe91b1f2dd8fd9b13bde6023510c3ab4e2e37f102daa89ee8483cc6",
+        "address": "0x493A69ec1de995B5b0fB968Bc67022D1C54E490e",
         "topics": [
           "0xc7f505b2f371ae2175ee4913f4499e1f2633a7b5936321eed1cdaeb6115181d2"
         ],
         "data": "0x0000000000000000000000000000000000000000000000000000000000000001",
-        "logIndex": 36,
-        "blockHash": "0xf6a23e0be2b14a0e4d4be339472640e8cc73330fd6ed8553c5c92eace0823208"
+        "logIndex": 3,
+        "blockHash": "0x1e782b9299451a4f4ead6ca76b42a275385b8d2b4fe0ad9b3097d76ad086ed7e"
       }
     ],
-    "blockNumber": 5691716,
-    "cumulativeGasUsed": "6921836",
+    "blockNumber": 39444384,
+    "cumulativeGasUsed": "436647",
     "status": 1,
     "byzantium": true
   },
   "args": [
-    "0x2B4899c7316cc7d15301dbD0A5D7204456D3B441",
-    "0x485cc955000000000000000000000000ba45b3d7a42c3554fa98bdc3f790da2676cb05600000000000000000000000000bf3de8c5d3e8a2b34d2beeb17abfcebaf363a59"
+    "0xB0D02c3025068D889E3a6d77ed48a9F7062bE153",
+    "0x530b97a4000000000000000000000000ba45b3d7a42c3554fa98bdc3f790da2676cb0560000000000000000000000000e1053ae1857476f36a3c62580ff9b016e8ee8f6f0000000000000000000000002514895c72f50d8bd4b4f9b1110f0d6bd2c97526000000000000000000000000000000000000000000000000de41ba4fc9d91ad900000000000000000000000010d5617ef73e62545f45017a0f85847c081b9fce"
   ],
   "numDeployments": 1,
   "bytecode": "0x60806040526040516107353803806107358339810160408190526100229161031e565b61002e82826000610035565b505061043b565b61003e8361006b565b60008251118061004b5750805b156100665761006483836100ab60201b6100291760201c565b505b505050565b610074816100d7565b6040516001600160a01b038216907fbc7cd75a20ee27fd9adebab32041f755214dbc6bffa90cc0225b39da2e5c2d3b90600090a250565b60606100d0838360405180606001604052806027815260200161070e602791396101a9565b9392505050565b6100ea8161022260201b6100551760201c565b6101515760405162461bcd60e51b815260206004820152602d60248201527f455243313936373a206e657720696d706c656d656e746174696f6e206973206e60448201526c1bdd08184818dbdb9d1c9858dd609a1b60648201526084015b60405180910390fd5b806101887f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc60001b61023160201b6100641760201c565b80546001600160a01b0319166001600160a01b039290921691909117905550565b6060600080856001600160a01b0316856040516101c691906103ec565b600060405180830381855af49150503d8060008114610201576040519150601f19603f3d011682016040523d82523d6000602084013e610206565b606091505b50909250905061021886838387610234565b9695505050505050565b6001600160a01b03163b151590565b90565b606083156102a0578251610299576001600160a01b0385163b6102995760405162461bcd60e51b815260206004820152601d60248201527f416464726573733a2063616c6c20746f206e6f6e2d636f6e74726163740000006044820152606401610148565b50816102aa565b6102aa83836102b2565b949350505050565b8151156102c25781518083602001fd5b8060405162461bcd60e51b81526004016101489190610408565b634e487b7160e01b600052604160045260246000fd5b60005b8381101561030d5781810151838201526020016102f5565b838111156100645750506000910152565b6000806040838503121561033157600080fd5b82516001600160a01b038116811461034857600080fd5b60208401519092506001600160401b038082111561036557600080fd5b818501915085601f83011261037957600080fd5b81518181111561038b5761038b6102dc565b604051601f8201601f19908116603f011681019083821181831017156103b3576103b36102dc565b816040528281528860208487010111156103cc57600080fd5b6103dd8360208301602088016102f2565b80955050505050509250929050565b600082516103fe8184602087016102f2565b9190910192915050565b60208152600082518060208401526104278160408501602087016102f2565b601f01601f19169190910160400192915050565b6102c48061044a6000396000f3fe60806040523661001357610011610017565b005b6100115b610027610022610067565b61009f565b565b606061004e8383604051806060016040528060278152602001610268602791396100c3565b9392505050565b6001600160a01b03163b151590565b90565b600061009a7f360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc546001600160a01b031690565b905090565b3660008037600080366000845af43d6000803e8080156100be573d6000f35b3d6000fd5b6060600080856001600160a01b0316856040516100e09190610218565b600060405180830381855af49150503d806000811461011b576040519150601f19603f3d011682016040523d82523d6000602084013e610120565b606091505b50915091506101318683838761013b565b9695505050505050565b606083156101ac5782516101a5576001600160a01b0385163b6101a55760405162461bcd60e51b815260206004820152601d60248201527f416464726573733a2063616c6c20746f206e6f6e2d636f6e747261637400000060448201526064015b60405180910390fd5b50816101b6565b6101b683836101be565b949350505050565b8151156101ce5781518083602001fd5b8060405162461bcd60e51b815260040161019c9190610234565b60005b838110156102035781810151838201526020016101eb565b83811115610212576000848401525b50505050565b6000825161022a8184602087016101e8565b9190910192915050565b60208152600082518060208401526102538160408501602087016101e8565b601f01601f1916919091016040019291505056fe416464726573733a206c6f772d6c6576656c2064656c65676174652063616c6c206661696c6564a2646970667358221220ff8e6f2d761d58b3bd984933269e01a7ff1f70a460b808056daa4cff1ee8ab6964736f6c63430008090033416464726573733a206c6f772d6c6576656c2064656c65676174652063616c6c206661696c6564",
@@ -547,8 +472,11 @@
     "methodName": "initialize",
     "args": [
       "0xba45b3d7A42c3554fa98bDC3F790da2676Cb0560",
-      "0x0BF3dE8c5D3e8A2B34D2BEeB17ABfCeBaf363A59"
+      "0xE1053aE1857476f36A3C62580FF9b016E8EE8F6f",
+      "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526",
+      "16015286601757825753",
+      "0x10d5617ef73E62545F45017A0F85847c081b9fcE"
     ]
   },
-  "implementation": "0x2B4899c7316cc7d15301dbD0A5D7204456D3B441"
+  "implementation": "0xB0D02c3025068D889E3a6d77ed48a9F7062bE153"
 }

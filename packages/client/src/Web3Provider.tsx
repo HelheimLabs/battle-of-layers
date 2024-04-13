@@ -1,10 +1,9 @@
-import { WagmiProvider, createConfig, http } from "wagmi";
+import { WagmiProvider, createConfig } from "wagmi";
 import {
   arbitrumSepolia,
-  avalanche,
   avalancheFuji,
+  baseSepolia,
   bscTestnet,
-  mainnet,
   optimismSepolia,
   sepolia,
 } from "wagmi/chains";
@@ -20,6 +19,7 @@ const config = createConfig(
       optimismSepolia,
       arbitrumSepolia,
       bscTestnet,
+      baseSepolia,
     ],
     // transports: {},
 
