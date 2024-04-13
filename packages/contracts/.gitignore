@@ -1,6 +1,8 @@
 # directories
 cache
 coverage
+artifacts
+solcInputs
 node_modules
 out
 

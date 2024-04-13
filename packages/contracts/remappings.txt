@@ -1,3 +1,6 @@
 @openzeppelin/contracts/=node_modules/@openzeppelin/contracts/
+@openzeppelin/contracts-upgradeable/=node_modules/@openzeppelin/contracts-upgradeable/
+@chainlink/contracts-ccip/=node_modules/@chainlink/contracts-ccip/
+@chainlink/contracts/=node_modules/@chainlink/contracts/
 @prb/test/=node_modules/@prb/test/
 forge-std/=node_modules/forge-std/

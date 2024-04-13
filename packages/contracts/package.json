@@ -1,19 +1,28 @@
 {
-  "name": "@prb/foundry-template",
-  "description": "Foundry-based template for developing Solidity smart contracts",
+  "name": "contracts",
+  "description": "Battle of layers contracts",
   "version": "1.0.0",
   "author": {
-    "name": "Paul Razvan Berg",
-    "url": "https://github.com/PaulRBerg"
+    "name": "Noy",
+    "url": "https://github.com/noyyyy"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.0.1"
+    "@chainlink/contracts": "^1.0.0",
+    "@chainlink/contracts-ccip": "^1.4.0",
+    "@openzeppelin/contracts": "^5.0.1",
+    "@openzeppelin/contracts-upgradeable": "^5.0.1",
+    "@openzeppelin/upgrades-core": "^1.32.5",
+    "dotenv": "^16.4.5",
+    "hardhat": "^2.22.2",
+    "hardhat-deploy": "^0.12.2",
+    "viem": "^2.9.16"
   },
   "devDependencies": {
     "@prb/test": "^0.6.4",
     "forge-std": "github:foundry-rs/forge-std#v1.7.5",
     "prettier": "^3.0.0",
-    "solhint": "^3.6.2"
+    "solhint": "^3.6.2",
+    "ts-node": "^10.9.2"
   },
   "keywords": [
     "blockchain",
@@ -28,6 +37,7 @@
   "scripts": {
     "clean": "rm -rf cache out",
     "build": "forge build",
+    "compile": "hardhat compile",
     "lint": "bun run lint:sol && bun run prettier:check",
     "lint:sol": "forge fmt --check && bun solhint {script,src,test}/**/*.sol",
     "prettier:check": "prettier --check \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
