@@ -29,6 +29,7 @@ const config = createConfig(
       [arbitrumSepolia.id]: http("https://arbitrum-sepolia-rpc.publicnode.com"),
       [bscTestnet.id]: http("https://bsc-testnet-rpc.publicnode.com"),
       [baseSepolia.id]: http("https://base-sepolia-rpc.publicnode.com"),
+      [sepolia.id]: http("https://ethereum-sepolia-rpc.publicnode.com"),
     },
 
     // Required API Keys

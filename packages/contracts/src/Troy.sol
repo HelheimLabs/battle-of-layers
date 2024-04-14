@@ -81,4 +81,9 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
         TroyStorage storage $ = _getTroyStorage();
         return ($.championChainId, $.soldierAmount);
     }
+
+    function isMessageIdFulFilled(bytes32 messageId) public view returns (bool) {
+        TroyStorage storage $ = _getTroyStorage();
+        return $.messageIdArrived[messageId];
+    }
 }

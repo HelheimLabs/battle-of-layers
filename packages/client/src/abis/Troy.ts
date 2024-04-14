@@ -199,6 +199,12 @@ export const TroyAbi = [
     inputs: [
       {
         indexed: true,
+        internalType: "bytes32",
+        name: "messageId",
+        type: "bytes32",
+      },
+      {
+        indexed: true,
         internalType: "uint256",
         name: "chainId",
         type: "uint256",
@@ -341,6 +347,25 @@ export const TroyAbi = [
     type: "function",
   },
   {
+    inputs: [
+      {
+        internalType: "bytes32",
+        name: "messageId",
+        type: "bytes32",
+      },
+    ],
+    name: "isMessageIdFulFilled",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
     inputs: [],
     name: "owner",
     outputs: [
@@ -384,21 +409,14 @@ export const TroyAbi = [
     name: "readStorageValue",
     outputs: [
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "championChainId",
-            type: "uint256",
-          },
-          {
-            internalType: "uint256",
-            name: "soldierAmount",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct Troy.TroyStorage",
-        name: "",
-        type: "tuple",
+        internalType: "uint256",
+        name: "championChainId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "soldierAmount",
+        type: "uint256",
       },
     ],
     stateMutability: "view",

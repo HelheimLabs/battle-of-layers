@@ -11,7 +11,7 @@ export function useChampion() {
     chainId: sepolia.id,
   });
 
-  const champion = troyStorage.data?.championChainId;
-  const championSoldiersAmount = troyStorage.data?.soldierAmount;
+  const champion = troyStorage.data?.[0];
+  const championSoldiersAmount = troyStorage.data?.[1];
   return { champion, championSoldiersAmount };
 }
