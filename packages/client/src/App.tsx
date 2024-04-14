@@ -13,6 +13,7 @@ import { Title } from "./component/Title";
 import "./index.css";
 import { Rules } from "./component/Rules";
 import { March } from "./component/March";
+import { BattleLogs } from "./component/BattleLogs";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <StatusBar />
         <Title />
         <Champion />
+        <BattleLogs />
         <March
           className="w-80 left-1/4 top-[40%]  rotate-[18deg]"
           chainId={baseSepolia.id}
@@ -71,6 +73,7 @@ function App() {
           className="right-[20rem] bottom-[20rem] "
           chainId={bscTestnet.id}
         />
+
       </div>
     </Web3Provider>
   );
