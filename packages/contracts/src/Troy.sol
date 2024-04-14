@@ -54,7 +54,7 @@ contract Troy is UUPSUpgradeable, Ownable2StepUpgradeable, CCIPReceiverUpgradeab
             _getTroyStorage().soldierAmount += incommingSoldierAmount;
         } else {
             if (curSoldierAmount >= incommingSoldierAmount) {
-                _getTroyStorage().soldierAmount += incommingSoldierAmount;
+                _getTroyStorage().soldierAmount -= incommingSoldierAmount;
             } else {
                 _getTroyStorage().soldierAmount = incommingSoldierAmount - curSoldierAmount;
                 _getTroyStorage().championChainId = srcChainId;
