@@ -21,7 +21,7 @@ export function BattleLogsText({
           src={getChainImage(Number(log.initChampion))}
         ></img>
         <div>
-          solder increase from ${Number(log.initAmount)} to $
+          solder increase from {Number(log.initAmount)} to {" "}
           {Number(log.laterAmount)}
         </div>
       </div>
