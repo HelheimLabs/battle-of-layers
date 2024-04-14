@@ -59,7 +59,7 @@ export function ConfirmDialog(props: IConfirmDialog) {
       <div className="flex flex-row items-center justify-center">
         <div className="-ml-12 mr-4">Fund {balanceData?.symbol} amount</div>
         <input
-          className="input w-20"
+          className="input w-20 input-bordered"
           type="text"
           onChange={(e) => {
             setFundAmount(e.target.value);
