@@ -93,7 +93,7 @@ export function March({
     >
       {inComing.map((i) => (
         <a
-          className="m-2"
+          className="m-2 animate-blink"
           id={i.messageId}
           href={`https://ccip.chain.link/msg/${i.messageId}`}
         >
